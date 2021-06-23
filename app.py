@@ -1,7 +1,9 @@
-from flask import Flask,request
+from flask import Flask, request
 import pandas as pd
 import numpy as np
 import pymongo
+import flask
+import os
 from pymongo import MongoClient
 from sklearn.preprocessing import LabelEncoder
 from sklearn.linear_model import LinearRegression
@@ -10,10 +12,10 @@ import pickle
 app = Flask(__name__)
 
 
-@app.route('/',methods=['GET','POST'])
+@app.route('/', methods=['GET', 'POST'])
 def hello_world():
     client = pymongo.MongoClient(
-        "mongodb+srv://amine:testtest@cluster0.qlxh6.mongodb.net/test2?retryWrites=true&w=majority")
+        'mongodb+srv://amine:testtest@cluster0.qlxh6.mongodb.net/test2?retryWrites=true&w=majority')
     db = client.test2
     collection_sell = db['Sell2']
     sell = pd.DataFrame(list(collection_sell.find({}, {'_id': False})))
@@ -36,10 +38,11 @@ def hello_world():
 
     # In[5]:
 
-    filename = 'finalized.sav'
-    filename2 = 'finalized2.sav'
-    filename3 = 'finalized3.sav'
-    filename4 = 'finalized4.sav'
+    filename = os.path.join(app.root_path, 'static', 'finalized.sav')
+    filename2 = os.path.join(app.root_path, 'static', 'finalized2.sav')
+    filename3 = os.path.join(app.root_path, 'static', 'finalized3.sav')
+    filename4 = os.path.join(app.root_path, 'static', 'finalized4.sav')
+    linear = os.path.join(app.root_path, 'static', 'linear.sav')
 
     # In[6]:
 
@@ -51,6 +54,7 @@ def hello_world():
     # In[7]:
 
     model = request.json['model']
+    print(model)
     brand = request.json['brand']
     notes = request.json['notes']
     types = request.json['types']
@@ -70,7 +74,7 @@ def hello_world():
 
     # In[9]:
 
-    linear = pickle.load(open('linear.sav', 'rb'))
+    linear = pickle.load(open(linear, 'rb'))
 
     # In[10]:
 
@@ -123,7 +127,8 @@ def hello_world():
     value = linear.predict(arrays)
 
     # In[19]:
-    return (np.e ** value)[0]
+    val = str((np.e ** value)[0])
+    return val
 
 
 if __name__ == '__main__':
