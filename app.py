@@ -54,7 +54,6 @@ def hello_world():
     # In[7]:
 
     model = request.json['model']
-    print(model)
     brand = request.json['brand']
     notes = request.json['notes']
     types = request.json['types']
