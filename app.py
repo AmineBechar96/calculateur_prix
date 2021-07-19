@@ -42,7 +42,9 @@ def hello_world():
     filename2 = os.path.join(app.root_path, 'static', 'finalized2.sav')
     filename3 = os.path.join(app.root_path, 'static', 'finalized3.sav')
     filename4 = os.path.join(app.root_path, 'static', 'finalized4.sav')
-    linear = os.path.join(app.root_path, 'static', 'linear.sav')
+    filename5 = os.path.join(app.root_path, 'static', 'finalized5.sav')
+    filename6 = os.path.join(app.root_path, 'static', 'finalized6.sav')
+    linear = os.path.join(app.root_path, 'static', 'linear3.sav')
 
     # In[6]:
 
@@ -50,6 +52,8 @@ def hello_world():
     label_enc2 = pickle.load(open(filename2, 'rb'))
     label_enc3 = pickle.load(open(filename3, 'rb'))
     label_enc4 = pickle.load(open(filename4, 'rb'))
+    label_enc5 = pickle.load(open(filename5, 'rb'))
+    label_enc6 = pickle.load(open(filename6, 'rb'))
 
     # In[7]:
 
@@ -59,10 +63,19 @@ def hello_world():
     types = request.json['types']
     proDate = request.json['proDate']
     energie = request.json['energie']
+    location = request.json['location']
+    tdi = request.json['tdi']
     transmission = request.json['transmission']
     ch = request.json['ch']
     litre = request.json['litre']
     kilometrage = request.json['kilometrage']
+
+    sell_predict['id'] = sell_predict.index
+    car_detaille = sell_predict[
+        (sell_predict.brand == brand) & (sell_predict.notes == notes) & (sell_predict.proDate == proDate)].groupby(
+        ['brand', 'notes', 'proDate']).describe()
+
+    prix_max = car_detaille.loc[:, 'price'].iloc[0, 1]
 
     # In[8]:
 
@@ -70,6 +83,9 @@ def hello_world():
     notes_num = label_enc2.transform([notes])[0]
     types_num = label_enc3.transform([types])[0]
     model_num = label_enc4.transform([model])[0]
+    location_num = label_enc5.transform([location])[0]
+    tdi_num = label_enc6.transform([tdi])[0]
+
 
     # In[9]:
 
@@ -111,17 +127,14 @@ def hello_world():
         var_energie_essence = 1
     if energie == 'GPL':
         var_energie_gpl = 1
-
-    # In[17]:
-
-    value = np.array([[model_num, brand_num, notes_num, types_num, proDate, ch, litre, kilometrage, var_model_medium,
-                       var_model_highend,
-                       var_transmission_manuelle, var_transmission_semi, var_energie_essence, var_energie_gpl]])
+    value = np.array([[model_num, brand_num, notes_num, types_num, proDate, ch, litre, location_num, kilometrage,
+                       tdi_num, var_model_medium, var_model_highend,
+                       var_transmission_manuelle, var_transmission_semi, var_energie_essence, var_energie_gpl,
+                       prix_max]])
     arrays = pd.DataFrame(data=value, columns=['model', 'brand', 'notes', 'type', 'proDate', 'ch', 'litre',
-                                               'kilometrage', 'Medium', 'Highend', 'Manuelle', 'Semi Automatique',
-                                               'Essence', 'GPL'])
+                                               'location', 'kilometrage', 'tdi', 'Medium', 'Highend', 'Manuelle',
+                                               'Semi Automatique', 'Essence', 'GPL', 'prix_max'])
 
-    # In[18]:
 
     value = linear.predict(arrays)
 
