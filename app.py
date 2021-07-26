@@ -17,7 +17,7 @@ def hello_world():
     client = pymongo.MongoClient(
         'mongodb+srv://amine:testtest@cluster0.qlxh6.mongodb.net/test2?retryWrites=true&w=majority')
     db = client.test2
-    collection_sell = db['Sell2']
+    collection_sell = db['Sell']
     sell = pd.DataFrame(list(collection_sell.find({}, {'_id': False})))
     sell.set_index('id', inplace=True)
 
