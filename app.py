@@ -38,13 +38,13 @@ def hello_world():
 
     # In[5]:
 
-    filename = os.path.join(app.root_path, 'static', 'finalized.sav')
-    filename2 = os.path.join(app.root_path, 'static', 'finalized2.sav')
-    filename3 = os.path.join(app.root_path, 'static', 'finalized3.sav')
-    filename4 = os.path.join(app.root_path, 'static', 'finalized4.sav')
-    filename5 = os.path.join(app.root_path, 'static', 'finalized5.sav')
-    filename6 = os.path.join(app.root_path, 'static', 'finalized6.sav')
-    linear = os.path.join(app.root_path, 'static', 'linear3.sav')
+    filename = os.path.join(app.root_path, 'static', 'finalizedd.sav')
+    filename2 = os.path.join(app.root_path, 'static', 'finalizedd2.sav')
+    filename3 = os.path.join(app.root_path, 'static', 'finalizedd3.sav')
+    filename4 = os.path.join(app.root_path, 'static', 'finalizedd4.sav')
+    filename5 = os.path.join(app.root_path, 'static', 'finalizedd5.sav')
+    filename6 = os.path.join(app.root_path, 'static', 'finalizedd6.sav')
+    linear = os.path.join(app.root_path, 'static', 'linear4.sav')
 
     # In[6]:
 
