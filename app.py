@@ -23,9 +23,7 @@ def hello_world():
 
     # In[3]:
 
-    sell_predict = sell.loc[:,
-                   ['model', 'brand', 'notes', 'type', 'proDate', 'energie', 'ch', 'transmission', 'kilometrage',
-                    'litre', 'price']]
+    sell_predict = sell.loc[:,['model','brand','notes','type','proDate','energie','ch','transmission','kilometrage','litre','price','location_wilaya','tdi']]
 
     # In[4]:
 
