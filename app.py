@@ -8,7 +8,7 @@ from pymongo import MongoClient
 from sklearn.preprocessing import LabelEncoder
 from sklearn.linear_model import LinearRegression
 import pickle
-
+import datetime
 app = Flask(__name__)
 
 
@@ -262,7 +262,38 @@ def hello_world2():
     val = str((np.e ** value)[0])
     return val
 
+@app.route('/accidenter', methods=['GET', 'POST'])
+def hello_world3():
+    annee = request.json['annee']
+    prix_model = request.json['prix_model']
+    prix_utilisateur = request.json['prix_utilisateur']
 
 
+    now = datetime.datetime.now()
+    val = percent(prix_utilisateur , prix_model)
+    year = now.year - annee
+    taux_final = val + year
+    print(val,taux_final)
+
+
+    if ((taux_final > -30) & (taux_final < 3)):
+        return "Trés conseiller : Cette voiture est dans une Excellente Etat"
+    elif ((taux_final > 2) & (taux_final < 16)):
+        return "Conseiller : Cette voiture est dans un Bon Etat"
+    elif ((taux_final > 15) & (taux_final < 25)):
+        return "Déconseiller : Cette voiture est dans une Mauvaise Etat"
+    elif ((taux_final > 24) & (taux_final < 50)):
+        return "Trop déconseiller : Cette voiture est dans une trés Mauvaise Etat"
+    else :
+        return "Entrer une valeur valide"
+
+
+def percent(a, b):
+        result = int(((b - a) * 100) / a)
+
+        return result
+    
+    
+    
 if __name__ == '__main__':
     app.run()
