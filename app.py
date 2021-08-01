@@ -274,8 +274,8 @@ def hello_world3():
     val = percent(prix_utilisateur , prix_model)
     year = now.year - annee
     taux_final = val + year
-    print(val,taux_final)
-    return 100 - val
+    val_final = 100 - val
+    return str(val_final)
 
 
     if ((taux_final > -30) & (taux_final < 3)):
