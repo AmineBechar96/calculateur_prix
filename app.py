@@ -274,7 +274,7 @@ def hello_world3():
     val = percent(prix_utilisateur , prix_model)
     year = now.year - annee
     taux_final = val + year
-    val_final = 100 - val
+    val_final = 100 - taux_final
     return str(val_final)
 
 
