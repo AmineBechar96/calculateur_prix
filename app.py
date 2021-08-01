@@ -271,7 +271,7 @@ def hello_world3():
 
 
     now = datetime.datetime.now()
-    val = percent(prix_model , prix_utilisateur )
+    val = percent(prix_utilisateur , prix_model)
     year = now.year - annee
     taux_final = val + year
     val_final = 100 - taux_final
