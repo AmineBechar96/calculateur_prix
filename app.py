@@ -67,6 +67,7 @@ def hello_world():
     ch = request.json['ch']
     litre = request.json['litre']
     kilometrage = request.json['kilometrage']
+    couleur = request.json['couleur']
 
     sell_predict['id'] = sell_predict.index
     car_detaille = sell_predict[
@@ -96,7 +97,7 @@ def hello_world():
     temp = sell_predict.copy()
     table = temp.groupby(['model'])['price'].mean()
     temp = temp.merge(table.reset_index(), how='left', on='model')
-    bins = [0, 100, 200, 400]
+    bins = [0, 150, 400, 800]
     cars_bin = ['Budget', 'Medium', 'Highend']
     sell_predict['carsrange'] = pd.cut(temp['price_y'], bins, right=False, labels=cars_bin)
     model_binaire = sell_predict[sell_predict.model == model].loc[:, 'carsrange'].iloc[1]
@@ -274,6 +275,7 @@ def hello_world3():
     year = now.year - annee
     taux_final = val + year
     print(val,taux_final)
+    return 100 - val
 
 
     if ((taux_final > -30) & (taux_final < 3)):
