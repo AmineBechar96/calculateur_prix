@@ -163,11 +163,11 @@ def hello_world2():
 
     # In[5]:
 
-    filename = os.path.join(app.root_path, 'static', 'finalizeD.sav')
-    filename2 = os.path.join(app.root_path, 'static', 'finalizeD2.sav')
-    filename3 = os.path.join(app.root_path, 'static', 'finalizeD3.sav')
-    filename4 = os.path.join(app.root_path, 'static', 'finalizeD4.sav')
-    filename5 = os.path.join(app.root_path, 'static', 'finalizeD5.sav')
+    filename = os.path.join(app.root_path, 'static', 'finalizeaD.sav')
+    filename2 = os.path.join(app.root_path, 'static', 'finalizeaD2.sav')
+    filename3 = os.path.join(app.root_path, 'static', 'finalizeaD3.sav')
+    filename4 = os.path.join(app.root_path, 'static', 'finalizeaD4.sav')
+    filename5 = os.path.join(app.root_path, 'static', 'finalizeaD5.sav')
     linear = os.path.join(app.root_path, 'static', 'linear5.sav')
 
     # In[6]:
