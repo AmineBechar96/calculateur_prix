@@ -291,7 +291,7 @@ def hello_world3():
 
 
 def percent(a, b):
-        result = int(((b - a) * 100) / a)
+        result = int((b * 100) / a)
 
         return result
     
