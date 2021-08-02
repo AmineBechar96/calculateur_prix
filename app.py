@@ -70,6 +70,21 @@ def hello_world():
     couleur = request.json['couleur']
 
     sell_predict['id'] = sell_predict.index
+    value1 = 0
+    value2 = 0
+    while ((sell_predict[(sell_predict.brand == brand) & (sell_predict.notes == notes) & (
+            sell_predict.proDate == proDate - value1)].empty) & (value1 < 9)):
+        value1 = value1 + 1
+
+    while ((sell_predict[(sell_predict.brand == brand) & (sell_predict.notes == notes) & (
+            sell_predict.proDate == proDate + value2)].empty) & (value2 < 9)):
+        value2 = value2 + 1
+
+    if (value1 < value2):
+        proDate = proDate - value1
+    else:
+        proDate = proDate + value2
+    print(proDate)
     car_detaille = sell_predict[
         (sell_predict.brand == brand) & (sell_predict.notes == notes) & (sell_predict.proDate == proDate)].groupby(
         ['brand', 'notes', 'proDate']).describe()
@@ -192,6 +207,21 @@ def hello_world2():
     kilometrage = request.json['kilometrage']
 
     sell_predict['id'] = sell_predict.index
+    value1 = 0
+    value2 = 0
+    while ((sell_predict[(sell_predict.brand == brand) & (sell_predict.notes == notes) & (
+            sell_predict.proDate == proDate - value1)].empty) & (value1 < 9)):
+        value1 = value1 + 1
+
+    while ((sell_predict[(sell_predict.brand == brand) & (sell_predict.notes == notes) & (
+            sell_predict.proDate == proDate + value2)].empty) & (value2 < 9)):
+        value2 = value2 + 1
+
+    if (value1 < value2):
+        proDate = proDate - value1
+    else:
+        proDate = proDate + value2
+
     car_detaille = sell_predict[
         (sell_predict.brand == brand) & (sell_predict.notes == notes) & (sell_predict.proDate == proDate)].groupby(
         ['brand', 'notes', 'proDate']).describe()
