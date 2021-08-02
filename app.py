@@ -223,8 +223,8 @@ def hello_world2():
         proDate = proDate + value2
 
     car_detaille = sell_predict[
-        (sell_predict.brand == brand) & (sell_predict.notes == notes) & (sell_predict.proDate == proDate)].groupby(
-        ['brand', 'notes', 'proDate']).describe()
+        (sell_predict.brand == brand) & (sell_predict.notes == notes)].groupby(
+        ['brand', 'notes']).describe()
     sell_predict.set_index('id', inplace=True)
     prix_max = car_detaille.loc[:, 'price'].iloc[0, 1]
 
